@@ -148,7 +148,6 @@ function HomeScreen() {
                 const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${item.idDrink}`);
                 const json = await response.json();
                 setSelectedCocktail(json.drinks[0]);
-                console.log(json.drinks[0])
                 setModalVisible(true);
                 }}>
                 <Image style={styles.cocktailImage} source={{ uri: item.strDrinkThumb }} />

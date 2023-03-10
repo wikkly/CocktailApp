@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, ActivityIndicator, FlatList, Image, TouchableOp
 import { useNavigation } from '@react-navigation/native';
 
 // Page "All cocktails"
-function AllCocktailsScreen() {
+function AllNonCocktailsScreen() {
   const styles = StyleSheet.create({
     drinkContainer: {
       borderWidth: 2,
@@ -34,7 +34,7 @@ function AllCocktailsScreen() {
 
   const GetCocktails = async () => {
     try {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic');
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic');
       const json = await response.json();
       setData(json.drinks);
     } catch (error) {
@@ -76,4 +76,4 @@ function AllCocktailsScreen() {
   );
 };
 
-export default AllCocktailsScreen;
+export default AllNonCocktailsScreen;

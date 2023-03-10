@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ActivityIndicator, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, ActivityIndicator, Button, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 function CocktailDetailsScreen({ route }) {
@@ -37,7 +37,7 @@ function CocktailDetailsScreen({ route }) {
   const handlePress = () => {
     navigation.reset({
       index: 0,
-      routes: [{ name: 'All cocktails' }],
+      routes: [{ name: 'Tous les cocktails - alcool' }],
     });
   };
 
@@ -61,6 +61,7 @@ function CocktailDetailsScreen({ route }) {
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: cocktail.strDrinkThumb }} />
       <Text style={styles.name}>{cocktail.strDrink}</Text>
+      <ScrollView>
       <Text style={styles.category}>{cocktail.strCategory}</Text>
       <Text style={styles.instructions}>{cocktail.strInstructions}</Text>
       <Text style={styles.modalText}> Ingrédients :</Text>
@@ -77,66 +78,82 @@ function CocktailDetailsScreen({ route }) {
         })}
         </View>
         <View style={styles.button}>
-      <Button title="All Cocktails" onPress={handlePress} />
+      <Button title="Autre cocktails ?" onPress={handlePress} />
       </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 24,
-      alignItems: 'center',
-      backgroundColor: '#df964a'
+  container: {
+    flex: 1,
+    backgroundColor: '#f9f9f9',
+    alignItems: 'center',
+    paddingTop: 20,
+  },
+  image: {
+    width: '100%',
+    height: 400,
+    marginBottom: 10,
+  },
+  name: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginVertical: 10,
+    color: '#4a4a4a',
+    textAlign: 'center',
+  },
+  category: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginVertical: 10,
+    color: '#ff7f50',
+    textAlign: 'center',
+  },
+  instructions: {
+    fontSize: 18,
+    marginVertical: 10,
+    color: '#4a4a4a',
+    textAlign: 'center',
+    paddingHorizontal: 20,
+  },
+  ingredient: {
+    fontSize: 18,
+    marginBottom: 5,
+    color: '#4a4a4a',
+    paddingHorizontal: 20,
+  },
+  modalText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 20,
+    color: '#4a4a4a',
+    textAlign: 'center',
+  },
+  button: {
+    marginVertical: 20,
+    width: '50%',
+    backgroundColor: '#ff7f50',
+    borderRadius: 20,
+    alignSelf: 'center',
+    shadowColor: '#4a4a4a',
+    shadowOffset: {
+      width: 0,
+      height: 2,
     },
-    image: {
-      width: 300,
-      height: 300,
-      marginBottom: 20,
-      borderRadius: 20
-    },
-    name: {
-      fontSize: 30,
-      fontWeight: 'bold',
-      marginBottom: 2,
-      color: '#3f0743'
-    },
-    category: {
-      fontSize: 18,
-      fontStyle: 'italic',
-      marginBottom: 30,
-      color: '#3f0743'
-    },
-    instructions: {
-      fontSize: 16,
-      textAlign: 'center',
-      marginBottom: 50,
-      color: '#3f0743'
-    },
-    modalText: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginBottom: 10,
-      color: '#3f0743'
-    },
-    ingredient: {
-      color: 'black',
-      margin: 5
-    },
-    buttonText: {
-      color: 'white',
-      fontWeight: 'bold',
-      fontSize: 18,
-      textAlign: 'center'
-    },
-    button: {
-        marginTop: 30, 
-        backgroundColor: '#3f0743',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
-    },
-  });
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonText: {
+    color: '#f9f9f9',
+    fontWeight: 'bold',
+    fontSize: 18,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    textAlign: 'center',
+  },
+});
 
 export default CocktailDetailsScreen;

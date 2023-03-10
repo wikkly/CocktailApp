@@ -2,14 +2,19 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+
+// Import Page
 import HomeScreen from './component/homeScreen';
 import AllCocktailsScreen from './component/allCocktailsScreen';
-import SearchByAlcoholScreen from './component/searchByAlcoholScreen';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CocktailDetailsScreen from './component/Details';
 import UserPage from './component/User';
 import CocktailSearch from './component/searchByAlcoholScreen';
+import PersonnalPage from './component/PersonnalPage';
+import AllNonCocktailsScreen from './component/allNonCocktailsScreen';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,15 +39,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// Page de connexion
-function SignInScreen() {
-  return (
-    <View>
-      <Text>Se connecter</Text>
-    </View>
-  );
-}
-
 // Configuration de la navigation empilable
 const Stack = createStackNavigator();
 
@@ -54,7 +50,17 @@ function StackNavigator() {
     </Stack.Navigator>
   );
 }
-
+const Tab = createBottomTabNavigator();
+function DetailsNavigator() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="L'alcool c'est cool" component={AllCocktailsScreen} options={{ tabBarIcon : ({color, size}) => (
+        <Icon name="glass" color={color} size={size} /> ), headerShown : false }} />
+      <Tab.Screen name="Your fucking account" component={PersonnalPage} options={{ tabBarIcon : ({color, size}) => (
+        <Icon name="user" color={color} size={size} /> ), headerShown : false }} />
+    </Tab.Navigator>
+  );
+}
 // Configuration de la navigation en tiroir
 const Drawer = createDrawerNavigator();
 
@@ -92,10 +98,12 @@ function DrawerNavigator() {
         </DrawerContentScrollView>
       );
     }}>
-      <Drawer.Screen name="Random Cocktail" component={StackNavigator} />
-      <Drawer.Screen name="All cocktails" component={AllCocktailsScreen} />
-      <Drawer.Screen name="Search by alcohol" component={CocktailSearch} />
-      <Drawer.Screen name="Details" component={CocktailDetailsScreen} />
+      <Drawer.Screen name="10 cocktails idea" component={StackNavigator} options={{unmountOnBlur: true}} />
+      <Drawer.Screen name="Tous les cocktails - alcool" component={AllCocktailsScreen} />
+      <Drawer.Screen name="Tous les cocktails - Sans alcool" component={AllNonCocktailsScreen} />
+      <Drawer.Screen name="Cocktails par alcool" component={CocktailSearch} />
+      <Drawer.Screen name="Détails" component={CocktailDetailsScreen} />
+      <Drawer.Screen name="Votre compte" component={DetailsNavigator} />
       <Drawer.Screen name="S'inscrire" component={UserPage} />
     </Drawer.Navigator>
   );
