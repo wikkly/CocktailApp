@@ -32,7 +32,7 @@ const UserPage = ({ navigation }) => {
       />
       <TouchableOpacity
         style={{ backgroundColor: 'grey', padding: 10, borderRadius: 5, marginTop: 30}}
-        onPress={() => navigation.navigate('Random Cocktail')}
+        onPress={() => navigation.navigate('10 cocktails idea')}
       >
         <Text style={{ color: 'white'}}>Go to Home</Text>
       </TouchableOpacity>

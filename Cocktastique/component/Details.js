@@ -68,11 +68,14 @@ function CocktailDetailsScreen({ route }) {
       <View style={{ flexDirection: "column" }}>
         {Object.keys(cocktail)
         .filter((key) => key.includes('strIngredient'))
-        .map((ingredientKey) => {
+        .map((ingredientKey, index) => {
         const ingredient = cocktail[ingredientKey];
+        const measureKey = `strMeasure${index + 1}`;
+        const measure = cocktail[measureKey];
         return ingredient ? (
         <Text style={styles.ingredient} key={ingredient}>
-        {ingredient}
+        <Image source={{ uri: `https://www.thecocktaildb.com/images/ingredients/${ingredient}.png`}} style={{width: 50, height: 50, alignSelf: "center", justifyContent: "center"}}/>
+        {`${ingredient} - ${measure}`}
         </Text>
         ) : null;
         })}
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 400,
+    height: 300,
     marginBottom: 10,
   },
   name: {
@@ -120,9 +123,9 @@ const styles = StyleSheet.create({
   },
   ingredient: {
     fontSize: 18,
-    marginBottom: 5,
+    marginBottom: 10,
     color: '#4a4a4a',
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
   },
   modalText: {
     fontSize: 22,

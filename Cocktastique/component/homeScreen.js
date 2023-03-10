@@ -5,111 +5,97 @@ import { Modal } from 'react-native';
 
 // Page d'accueil
 function HomeScreen() {
-
-    const styles = StyleSheet.create({
-        title: {
-          marginTop: 50,
-          marginBottom: 30,
-          fontSize: 20,
-          fontWeight: "bold",
-          color: "white",
-        },
-        container: {
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#111118',
-        },
-        text: {
-            marginTop: 30, 
-            textAlign: 'center',
-            fontStyle: 'italic',
-            fontWeight: 'bold',
-            fontSize: 30,
-            color: '#df964a',
-          },
-          textbottom: {
-            textAlign: 'center',
-            fontStyle: 'italic',
-            fontWeight: 'bold',
-            fontSize: 20,
-            marginBottom: 20, 
-            color: '#df964a',
-          },
-        containerbis: {
-          flex: 1,
-          height : "100%",
-          marginLeft: 10,
-          marginTop: 20, 
-          marginBottom: 0,
-          backgroundColor: '#2f263d',
-        },
-        cocktailContainer: {
-          margin: 20,
-          marginTop: 60,
-          marginBottom: 0,  
-          alignItems: 'center',
-        },
-        cocktailImage: {
-          width: 300,
-          height: 300,
-          borderRadius: 10,
-        },
-        cocktailTitle: {
-          fontSize: 16,
-          fontWeight: 'bold',
-          textAlign: 'center',
-          marginTop: 10,
-          color: 'white',
-        },
-        centeredView: {
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 22
-          },
-          modalView: {
-            margin: 20,
-            backgroundColor: "#2f263d",
-            borderRadius: 10,
-            padding: 35,
-            alignItems: "center",
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 2
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 4,
-            elevation: 5
-          },
-          modalText: {
-            marginBottom: 15,
-            fontSize: 18,
-            textAlign: "center",
-            color: "#fff"
-          },
-          modalTextTitle: {
-            marginBottom: 15,
-            fontSize: 20,
-            fontWeight: "bold",
-            textAlign: "center",
-            color: "#fff"
-          },
-          modalButton: {
-            borderRadius: 5,
-            padding: 10,
-            elevation: 2,
-            backgroundColor: "#df964a",
-            marginTop: 10,
-          },
-          modalButtonText: {
-            color: "#fff",
-            fontWeight: "bold",
-            textAlign: "center",
-          }
-      })
-
+ 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#1e1e1e',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+      backgroundColor: "#352237"
+    },
+    containerbis: {
+      flex: 1,
+      backgroundColor: '#1e1e1e',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 20,
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
+      marginTop: 30,
+    },
+    text: {
+      color: '#fff',
+      fontSize: 25,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginBottom: 10,
+    },
+    textbottom: {
+      color: '#fff',
+      fontSize: 16,
+      fontWeight: 'bold',
+      marginTop: 10,
+      marginBottom: 10,
+    },
+    cocktailContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: 10,
+    },
+    cocktailImage: {
+      width: 200,
+      height: 200,
+      borderRadius: 50,
+    },
+    cocktailTitle: {
+      color: '#fff',
+      fontSize: 16,
+      fontWeight: 'bold',
+      marginTop: 10,
+    },
+    centeredView: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalView: {
+      backgroundColor: '#1e1e1e',
+      borderRadius: 20,
+      padding: 35,
+      alignItems: 'center',
+      elevation: 5,
+    },
+    modalTextTitle: {
+      color: '#fff',
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 10,
+      textAlign: 'center',
+    },
+    modalText: {
+      color: '#fff',
+      fontSize: 16,
+      marginBottom: 10,
+      textAlign: 'center',
+    },
+    modalButton: {
+      borderRadius: 20,
+      padding: 10,
+      elevation: 2,
+      backgroundColor: '#3e3e3e',
+      marginTop: 20,
+    },
+    modalButtonText: {
+      color: '#fff',
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
+  });
+  
+  
     const [isLoading, setLoading] = useState(true);
     const [cocktails, setCocktails] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
@@ -129,7 +115,7 @@ function HomeScreen() {
     useEffect(() => {
       const Get10Cocktails = async () => {
         const newCocktails = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 30; i++) {
           const cocktail = await getCocktail();
           if (cocktail !== null) {
             newCocktails.push(cocktail);
@@ -171,7 +157,7 @@ function HomeScreen() {
                     keyExtractor={(item) => item.idDrink}
                   />
                   <Text style={styles.textbottom}> Pour voir les recettes des boissons, cliquez dessus ! </Text>
-                  <Image source={require('../assets/menu.png')} style={{ width: 125, height: 125, alignSelf: 'center', justifyContent: 'center'}} />
+                  <Image source={require('../assets/menu.png')} style={{ width: 200, height: 200, alignSelf: 'center', justifyContent: 'center', marginBottom: -20}} />
                   {selectedCocktail &&
                   <Modal
                     animationType="slide"
@@ -189,11 +175,14 @@ function HomeScreen() {
                         <View style={{ flexDirection: "column" }}>
                         {Object.keys(selectedCocktail)
                             .filter((key) => key.includes('strIngredient'))
-                            .map((ingredientKey) => {
+                            .map((ingredientKey, index) => {
                       const ingredient = selectedCocktail[ingredientKey];
+                      const measureKey = `strMeasure${index + 1}`;
+                      const measure = selectedCocktail[measureKey];
                       return ingredient ? (
                         <Text style={{ color: '#fff', margin: 5 }} key={ingredient}>
-                          {ingredient}
+                        <Image source={{ uri: `https://www.thecocktaildb.com/images/ingredients/${ingredient}.png`}} style={{width: 50, height: 50}}/>
+                          
                         </Text>
                       ) : null;
                     })}
